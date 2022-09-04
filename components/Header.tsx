@@ -1,16 +1,19 @@
-import { Button, chakra, useColorMode } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Button, chakra, Heading, useColorMode } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 export const Header = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <chakra.header
       display='flex'
-      justifyContent='end'
+      justifyContent='space-between'
       background='blue.300'
+      boxShadow='lg'
       p={3}
-      boxShadow='lg'>
+      mb={3}>
+      <Heading>Turpial Proyect</Heading>
+
       <Button
         onClick={toggleColorMode}
         background='whiteAlpha.400'
@@ -18,5 +21,5 @@ export const Header = () => {
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </Button>
     </chakra.header>
-  );
-};
+  )
+}

@@ -1,31 +1,31 @@
 export interface CharactersData {
-  characters: Characters;
+  characters: Characters
 }
 export interface Characters {
-  info: Info;
-  results: Result[];
+  info: Info
+  results: CharacterResult[]
 }
 
 export interface Info {
-  count: number;
-  next: string;
-  pages: number;
-  prev: null;
+  count: number
+  next: string
+  pages: number
+  prev: null
 }
 
-export interface Result {
-  created: Date;
-  episode: string[];
-  gender: Gender;
-  id: number;
-  image: string;
-  location: Location;
-  name: string;
-  origin: Location;
-  species: Species;
-  status: Status;
-  type: string;
-  url: string;
+export interface CharacterResult {
+  created: Date
+  episode: string[]
+  gender: Gender
+  id: number
+  image: string
+  location: Location
+  name: string
+  origin: Location
+  species: Species
+  status: Status
+  type: string
+  url: string
 }
 
 export enum Gender {
@@ -35,8 +35,8 @@ export enum Gender {
 }
 
 export interface Location {
-  name: string;
-  url: string;
+  name: string
+  url: string
 }
 
 export enum Species {

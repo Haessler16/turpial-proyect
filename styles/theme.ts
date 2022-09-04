@@ -3,13 +3,13 @@ import {
   ComponentStyleConfig,
   extendTheme,
   ThemeConfig,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
 // Add your color mode config
 const config: ThemeConfig = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
-};
+}
 
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
@@ -18,17 +18,17 @@ const colors = {
     800: '#153e75',
     700: '#2a69ac',
   },
-};
+}
 
 const Card: ComponentStyleConfig = {
   // The styles all Cards have in common
-  baseStyle: {
+  baseStyle: ({ colorMode }) => ({
     display: 'flex',
     flexDirection: 'column',
-    background: 'white',
+    background: colorMode === 'dark' ? '#9ee6dd' : '#f1ec6b',
     alignItems: 'center',
     gap: 6,
-  },
+  }),
   // Two variants: rounded and smooth
   variants: {
     rounded: {
@@ -46,8 +46,8 @@ const Card: ComponentStyleConfig = {
   defaultProps: {
     variant: 'smooth',
   },
-};
+}
 
-const theme = extendTheme({ config, colors, components: { Card } });
+const theme = extendTheme({ config, colors, components: { Card } })
 
-export default theme;
+export default theme

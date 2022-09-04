@@ -1,6 +1,6 @@
 import { Box, useStyleConfig } from '@chakra-ui/react';
 
-function Card(props: { [x: string]: any; variant: any }) {
+export function Card(props: any) {
   const { variant, ...rest } = props;
 
   const styles = useStyleConfig('Card', { variant });
