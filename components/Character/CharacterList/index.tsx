@@ -11,7 +11,7 @@ interface CharacterListProps {
 
 export const CharacterList: FC<CharacterListProps> = ({ character }) => {
   return (
-    <Card key={character.id} borderRadius='lg'>
+    <Card borderRadius='lg'>
       <Heading>{character.name}</Heading>
       <chakra.figure w='100%'>
         <Image
