@@ -1,24 +1,19 @@
-import Image from 'next/image'
 import { useQuery, gql } from '@apollo/client'
-import {
-  Button,
-  Center,
-  chakra,
-  Grid,
-  Heading,
-  Input,
-  Text,
-} from '@chakra-ui/react'
-import { Card } from 'components/Card'
+import { Button, Center, chakra, Grid, Input } from '@chakra-ui/react'
+
 import { CharacterResult, CharactersData } from 'utils/interfaces/characters'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useDebounce } from 'hooks/useDebounds'
 import { useSearch } from 'hooks/useSearch'
 import { CharacterList } from './CharacterList'
 
-const GET_CHARACTERS = gql`
-  query {
-    characters {
+const GET_ALL_CHARACTERS = gql`
+  query Characters($page: Int!) {
+    characters(page: $page) {
+      info {
+        next
+        prev
+      }
       results {
         id
         name
@@ -29,12 +24,15 @@ const GET_CHARACTERS = gql`
   }
 `
 
-export const Character = () => {
-  const { loading, error, data } =
-    useQuery<Partial<CharactersData>>(GET_CHARACTERS)
+export const Characters = () => {
+  const { loading, error, data, refetch } = useQuery<Partial<CharactersData>>(
+    GET_ALL_CHARACTERS,
+    { variables: { page: 1 } },
+  )
 
   const [inputValue, setInputValue] = useState('')
-  const [page, setPage] = useState('')
+  // const [nextPage, setNextPage] = useState('')
+  // const [prevPage, setPrevPage] = useState('')
 
   const searchTerm = useDebounce(inputValue, 800)
 
@@ -51,10 +49,7 @@ export const Character = () => {
   })
 
   if (loading) return <h1>Loading...</h1>
-  if (error) return <h1>`Error! ${error.message}`</h1>
-
-  // console.log({ inputValue })
-  // console.table(data?.characters?.results)
+  if (error) return <h1>Error! {error.message}</h1>
 
   return (
     <chakra.main px={12}>
@@ -79,8 +74,12 @@ export const Character = () => {
       </Grid>
 
       <Center my={6} gap={8}>
-        <Button>prev page</Button>
-        <Button>next page</Button>
+        <Button onClick={() => refetch({ page: data?.characters?.info.prev })}>
+          Prev page
+        </Button>
+        <Button onClick={() => refetch({ page: data?.characters?.info.next })}>
+          Next page
+        </Button>
       </Center>
     </chakra.main>
   )

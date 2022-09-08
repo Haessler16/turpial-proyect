@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Header } from 'components/Header'
-import { CharacterList } from 'components/Character/CharacterList'
 import { Box } from '@chakra-ui/react'
-import { Character } from 'components/Character'
+import { Characters } from 'components/Characters'
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +15,7 @@ const Home: NextPage = () => {
 
       <Box w='100%'>
         <Header />
-        <Character />
+        <Characters />
       </Box>
     </>
   )

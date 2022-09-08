@@ -21,6 +21,7 @@ export const CharacterList: FC<CharacterListProps> = ({ character }) => {
           height={300}
           layout='responsive'
           style={{ borderRadius: '25px' }}
+          priority={character.name === 'Morty Smith' ? true : false}
         />
       </chakra.figure>
     </Card>
