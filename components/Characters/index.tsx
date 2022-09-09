@@ -60,12 +60,13 @@ export const Characters = () => {
           type='search'
           variant='filled'
           placeholder='Search a Character'
-          name='Search Character'
+          name='search_character'
           onChange={(e) => setInputValue(e.target.value)}
         />
       </Center>
 
       <Grid
+        id='characters_grid'
         templateColumns='repeat(auto-fit, minmax(min(100%, 25rem), 1fr))'
         gap={2}>
         {charactersFiltered.map((character) => {
