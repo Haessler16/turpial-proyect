@@ -1,7 +1,8 @@
-describe('Visit the page', () => {
+describe('Visit the page and check what kind characters are displayed', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   })
+
   it('Check regular names in the first request', () => {
     cy.get('#characters_grid').children().as('characterList')
 

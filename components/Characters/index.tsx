@@ -75,10 +75,15 @@ export const Characters = () => {
       </Grid>
 
       <Center my={6} gap={8}>
-        <Button onClick={() => refetch({ page: data?.characters?.info.prev })}>
+        <Button
+          name='prev_page'
+          onClick={() => refetch({ page: data?.characters?.info.prev })}>
           Prev page
         </Button>
-        <Button onClick={() => refetch({ page: data?.characters?.info.next })}>
+
+        <Button
+          name='next_page'
+          onClick={() => refetch({ page: data?.characters?.info.next })}>
           Next page
         </Button>
       </Center>
