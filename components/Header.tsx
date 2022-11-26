@@ -1,4 +1,5 @@
-import { Button, chakra, Heading, useColorMode } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import { Button, chakra, Heading, Link, useColorMode } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 export const Header = () => {
@@ -12,7 +13,19 @@ export const Header = () => {
       boxShadow='lg'
       p={3}
       mb={3}>
-      <Heading>Turpial Proyect</Heading>
+      <Heading>Rick and Morty</Heading>
+
+      <NextLink href='/' passHref>
+        <Link>Characters</Link>
+      </NextLink>
+
+      <NextLink href='/locations' passHref>
+        <Link>Location</Link>
+      </NextLink>
+
+      <NextLink href='/episodes' passHref>
+        <Link>Episode</Link>
+      </NextLink>
 
       <Button
         onClick={toggleColorMode}

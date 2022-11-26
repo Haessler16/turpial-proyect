@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react'
 import { useDebounce } from 'hooks/useDebounds'
 import { useSearch } from 'hooks/useSearch'
 import { CharacterList } from './CharacterList'
+import Loader from 'components/Loader'
 
 const GET_ALL_CHARACTERS = gql`
   query Characters($page: Int!) {
@@ -48,8 +49,10 @@ export const Characters = () => {
     term: searchTerm,
   })
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <Loader />
   if (error) return <h1>Error! {error.message}</h1>
+
+  console.log({ data })
 
   return (
     <chakra.main px={12}>

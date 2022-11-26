@@ -1,6 +1,11 @@
 export interface CharactersData {
   characters: Characters
 }
+
+export interface CharacterData {
+  character: CharacterResult
+}
+
 export interface Characters {
   info: Info
   results: CharacterResult[]
@@ -15,7 +20,7 @@ export interface Info {
 
 export interface CharacterResult {
   created: Date
-  episode: string[]
+  episode: Episode[]
   gender: Gender
   id: number
   image: string
@@ -28,10 +33,13 @@ export interface CharacterResult {
   url: string
 }
 
-export enum Gender {
-  Female = 'Female',
-  Male = 'Male',
-  Unknown = 'unknown',
+interface Episode {
+  id: number
+  name: string
+  air_date: string
+  episode: string
+  characters: string[]
+  created: string
 }
 
 export interface Location {
@@ -39,13 +47,8 @@ export interface Location {
   url: string
 }
 
-export enum Species {
-  Alien = 'Alien',
-  Human = 'Human',
-}
+export type Gender = 'Female' | 'Male' | 'unknown'
 
-export enum Status {
-  Alive = 'Alive',
-  Dead = 'Dead',
-  Unknown = 'unknown',
-}
+export type Species = 'Alien' | 'Human'
+
+export type Status = 'Alive' | 'Dead' | 'unknown'
