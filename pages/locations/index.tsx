@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { Box, Center, Grid } from '@chakra-ui/react'
+import { Box, Button, Center, Grid } from '@chakra-ui/react'
 import Loader from 'components/Loader'
 import { LocationCard } from 'components/LocationCard'
 import { MainLayout } from 'layouts/main'
@@ -48,13 +48,27 @@ export default function Locations() {
 
       <Grid
         id='characters_grid'
-        templateColumns='repeat(auto-fit, minmax(min(100%, 25rem), 1fr))'
+        templateColumns='repeat(auto-fit, minmax(min(100%, 20rem), 1fr))'
         justifyItems='center'
         gap={2}>
         {data.locations.results.map((location) => {
           return <LocationCard key={location.id} location={location} />
         })}
       </Grid>
+
+      <Center my={6} gap={8}>
+        <Button
+          name='prev_page'
+          onClick={() => refetch({ page: data?.locations?.info.prev })}>
+          Prev page
+        </Button>
+
+        <Button
+          name='next_page'
+          onClick={() => refetch({ page: data?.locations?.info.next })}>
+          Next page
+        </Button>
+      </Center>
     </MainLayout>
   )
 }

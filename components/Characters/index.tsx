@@ -70,7 +70,7 @@ export const Characters = () => {
 
       <Grid
         id='characters_grid'
-        templateColumns='repeat(auto-fit, minmax(min(100%, 25rem), 1fr))'
+        templateColumns='repeat(auto-fit, minmax(min(100%, 22rem), 1fr))'
         gap={2}>
         {charactersFiltered.map((character) => {
           return <CharacterList key={character.id} character={character} />

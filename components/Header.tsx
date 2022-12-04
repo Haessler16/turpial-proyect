@@ -9,6 +9,7 @@ export const Header = () => {
     <chakra.header
       display='flex'
       justifyContent='space-between'
+      alignItems='center'
       background='blue.300'
       boxShadow='lg'
       p={3}
@@ -16,15 +17,21 @@ export const Header = () => {
       <Heading>Rick and Morty</Heading>
 
       <NextLink href='/' passHref>
-        <Link>Characters</Link>
+        <Link fontSize='lg' fontWeight='bold'>
+          Characters
+        </Link>
       </NextLink>
 
       <NextLink href='/locations' passHref>
-        <Link>Location</Link>
+        <Link fontSize='lg' fontWeight='bold'>
+          Location
+        </Link>
       </NextLink>
 
       <NextLink href='/episodes' passHref>
-        <Link>Episode</Link>
+        <Link fontSize='lg' fontWeight='bold'>
+          Episode
+        </Link>
       </NextLink>
 
       <Button

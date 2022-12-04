@@ -17,14 +17,15 @@ import {
 
 import { Card as TvmCard } from 'components/Card'
 import { CharacterResult } from 'utils/interfaces/characters'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation, Scrollbar, A11y, Controller } from 'swiper'
+import { Pagination, Navigation, Keyboard } from 'swiper'
+
+import styles from './styles.module.css'
 
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-import 'swiper/css/controller'
+import 'swiper/css/navigation'
 
 interface CharacterListProps {
   character: CharacterResult
@@ -101,25 +102,27 @@ export const CharacterList: FC<CharacterListProps> = ({
             <Text>Status: {character.status}</Text>
             <Text>Gender: {character.gender}</Text>
             <Text>Species: {character.species}</Text>
-            {/* {character.type !== '' && <Text>type: {character.type}</Text>} */}
-            <Text>Type: {character.type}</Text>
+            {character.type !== '' && <Text>type: {character.type}</Text>}
+            {/* <Text>Type: {character.type}</Text> */}
           </Grid>
 
-          <Card w='300px'>
+          <Card w='100%' maxW='500px' h='100%' maxH='240px' bg='#dbdbdb50'>
             <CardHeader>
-              <Heading size='md'>Episodes</Heading>
+              <Heading size='md'>Episodes: </Heading>
             </CardHeader>
 
-            <CardBody>
+            <CardBody p='1'>
               <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y, Controller]}
+                modules={[Navigation, Keyboard, Pagination]}
+                slidesPerView={2}
                 spaceBetween={30}
-                slidesPerView={3}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}>
+                keyboard={{ enabled: true }}
+                pagination={{ clickable: true }}
+                navigation={true}
+                style={{ position: 'initial' }}>
                 {character.episode.map((ep) => {
                   return (
-                    <SwiperSlide key={ep.id}>
+                    <SwiperSlide key={ep.id} className={styles['swiper-slide']}>
                       <NextLink href={`/episodes/${ep.id}`}>
                         <Link>{ep.episode}</Link>
                       </NextLink>
@@ -128,6 +131,34 @@ export const CharacterList: FC<CharacterListProps> = ({
                     </SwiperSlide>
                   )
                 })}
+                {/* <SwiperSlide className={styles['swiper-slide']}>
+                  <NextLink href={`/episodes/1`}>
+                    <Link>S0201</Link>
+                  </NextLink>
+
+                  <p>BUM</p>
+                </SwiperSlide>
+                <SwiperSlide className={styles['swiper-slide']}>
+                  <NextLink href={`/episodes/1`}>
+                    <Link>S0202</Link>
+                  </NextLink>
+
+                  <p>KAT</p>
+                </SwiperSlide>
+                <SwiperSlide className={styles['swiper-slide']}>
+                  <NextLink href={`/episodes/1`}>
+                    <Link>S0203</Link>
+                  </NextLink>
+
+                  <p>FUM</p>
+                </SwiperSlide>
+                <SwiperSlide className={styles['swiper-slide']}>
+                  <NextLink href={`/episodes/1`}>
+                    <Link>S0204</Link>
+                  </NextLink>
+
+                  <p>TAM</p>
+                </SwiperSlide> */}
               </Swiper>
             </CardBody>
           </Card>

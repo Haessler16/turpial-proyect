@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { Box, Center, Grid } from '@chakra-ui/react'
+import { Box, Button, Center, Grid } from '@chakra-ui/react'
 import { EpisodeoCard } from 'components/EpisodeoCard'
 import Loader from 'components/Loader'
 import { MainLayout } from 'layouts/main'
@@ -54,6 +54,19 @@ export default function Episodes() {
           return <EpisodeoCard key={episode.id} episode={episode} />
         })}
       </Grid>
+      <Center my={6} gap={8}>
+        <Button
+          name='prev_page'
+          onClick={() => refetch({ page: data?.episodes?.info.prev })}>
+          Prev page
+        </Button>
+
+        <Button
+          name='next_page'
+          onClick={() => refetch({ page: data?.episodes?.info.next })}>
+          Next page
+        </Button>
+      </Center>
     </MainLayout>
   )
 }
