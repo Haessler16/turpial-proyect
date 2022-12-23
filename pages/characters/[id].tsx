@@ -40,6 +40,7 @@ const GET_CHARACTER = gql`
 const Character: NextPage = () => {
   const router = useRouter()
   const { id } = router.query
+
   const { loading, error, data } = useQuery<CharacterData>(GET_CHARACTER, {
     variables: { id },
   })

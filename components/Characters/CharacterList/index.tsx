@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import NextLink from 'next/link'
 
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 
 import {
   Card,
@@ -20,17 +20,21 @@ import { CharacterResult } from 'utils/interfaces/characters'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Keyboard } from 'swiper'
+import Tilt from 'react-parallax-tilt'
 
 import styles from './styles.module.css'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import { motion } from 'framer-motion'
 
 interface CharacterListProps {
   character: CharacterResult
   type?: 'group' | 'individual'
 }
+
+const MotionCard = motion(TvmCard)
 
 export const CharacterList: FC<CharacterListProps> = ({
   character,
@@ -46,29 +50,31 @@ export const CharacterList: FC<CharacterListProps> = ({
 
   if (type === 'group') {
     return (
-      <TvmCard
-        borderRadius='lg'
-        border='2px'
-        p={4}
-        borderColor={getStatusColor(character.status)}>
-        <NextLink href={`/characters/${character.id}`}>
-          <Link>
-            <Heading>{character.name}</Heading>
-          </Link>
-        </NextLink>
+      <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
+        <MotionCard
+          borderRadius='lg'
+          border='2px'
+          p={4}
+          borderColor={getStatusColor(character.status)}>
+          <NextLink href={`/characters/${character.id}`}>
+            <Link>
+              <Heading>{character.name}</Heading>
+            </Link>
+          </NextLink>
 
-        <chakra.figure w='100%'>
-          <Image
-            src={character.image}
-            alt={character.name}
-            width={300}
-            height={300}
-            layout='responsive'
-            style={{ borderRadius: '25px' }}
-            priority={character.name === 'Morty Smith' ? true : false}
-          />
-        </chakra.figure>
-      </TvmCard>
+          <chakra.figure w='100%'>
+            <Image
+              src={character.image}
+              alt={character.name}
+              width={300}
+              height={300}
+              layout='responsive'
+              style={{ borderRadius: '25px' }}
+              priority={character.name === 'Morty Smith' ? true : false}
+            />
+          </chakra.figure>
+        </MotionCard>
+      </Tilt>
     )
   }
 

@@ -4,25 +4,36 @@ import Loader from 'components/Loader'
 import { MainLayout } from 'layouts/main'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
+
+const GET_EPISODE = gql`
+  query episode($id: ID!) {
+    episode(id: $id) {
+      id
+      name
+      air_date
+      episode
+      characters {
+        id
+        name
+        species
+      }
+    }
+  }
+`
 
 const Episode: NextPage = () => {
   const router = useRouter()
   const { id } = router.query
-  // const { loading, error, data } = useQuery<CharacterData>(GET_CHARACTER, {
-  //   variables: { id },
-  // })
+  const { loading, error, data } = useQuery<CharacterData>(GET_EPISODE, {
+    variables: { id },
+  })
 
-  // if (loading)
-  //   return (
+  if (loading) return <Loader />
+  if (error) return <h1>Error! {error.message}</h1>
+  if (!data) return <h1>No data</h1>
 
-  //       <Loader />
-
-  //   )
-  // if (error) return <h1>Error! {error.message}</h1>
-  // if (!data) return <h1>No data</h1>
-
-  // console.log({ data })
+  console.log({ data })
   return (
     <MainLayout>
       <Head>
@@ -37,7 +48,7 @@ const Episode: NextPage = () => {
         display='flex'
         justifyContent='center'
         alignItems='center'>
-        {id}
+        Episode {id}
       </Box>
     </MainLayout>
   )
